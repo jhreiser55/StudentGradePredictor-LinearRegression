@@ -24,3 +24,11 @@ linear.fit(x_train, y_train)
 #stores the test results based of the training data
 accuracy = linear.score(x_test, y_test)
 print(accuracy)
+
+print("Coefficient: \n", linear.coef_)
+print("Intercept: \n", linear.intercept_)
+
+#showing input and output data after going through the predictor
+predictions = linear.predict(x_test)
+for x in range(len(predictions)):
+    print(predictions[x], x_test[x], y_test[x])
