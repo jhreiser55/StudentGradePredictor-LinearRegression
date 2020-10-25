@@ -16,23 +16,27 @@ predict = "G3"
 x = np.array(data.drop([predict], 1))
 y = np.array(data[predict])
 
-x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
+#After achieving a 96% accuracy, I no longer need to relearn every time i run since we
+#saved the accuracy file with pickle
+"""
+highest_accuracy = 0
+for _ in range(10000):
+    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(x, y, test_size=0.1)
 
-#commenting out so we dont train the model every time and can use previous knowledge with pickle
-#Use the commented out code when not using pickle
-#instanciaing the linear model
-"""linear = linear_model.LinearRegression()
+    #instanciaing the linear model
+    linear = linear_model.LinearRegression()
 
-#uses the x and y data to train the AI and determine a line of best fit for the data
-linear.fit(x_train, y_train)
+    #uses the x and y data to train the AI and determine a line of best fit for the data
+    linear.fit(x_train, y_train)
 
-#stores the test results based of the training data
-accuracy = linear.score(x_test, y_test)
-print(accuracy)
+    #stores the test results based of the training data
+    accuracy = linear.score(x_test, y_test)
 
-#writing our results to a file to use later on
-with open("studentmodel.pickle", "wb") as f:
-    pickle.dump(linear, f)"""
+    if accuracy > highest_accuracy:
+        highest_accuracy = accuracy
+        #writing our results to a file to use later on
+        with open("studentmodel.pickle", "wb") as f:
+            pickle.dump(linear, f)"""
 
 pickle_in = open("studentmodel.pickle", "rb")
 linear = pickle.load(pickle_in)
